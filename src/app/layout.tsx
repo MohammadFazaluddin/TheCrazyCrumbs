@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Tenor_Sans } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -10,15 +10,15 @@ const cormorantGaramond = Cormorant_Garamond({
   display: "swap",
 });
 
-const tenorSans = Tenor_Sans({
+const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "The Crazy Crumbs — Artisanal Commissions for the Refined Palate",
+  title: "The Crazy Crumbs - Boutique Patisserie",
   description:
     "World-Class Tres Leches and Boutique Confections. Hand-crafted from scratch. 100% Natural. Request your bespoke commission today.",
   keywords: [
@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorantGaramond.variable} ${tenorSans.variable}`}
+      className={`${cormorantGaramond.variable} ${inter.variable}`}
     >
       <body>{children}</body>
     </html>

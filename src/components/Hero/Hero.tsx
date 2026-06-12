@@ -1,137 +1,51 @@
-import Image from "next/image";
-import Button from "@/components/ui/Button";
-import GoldDivider from "@/components/ui/GoldDivider";
-import RevealOnScroll from "@/components/ui/RevealOnScroll";
+import Image from 'next/image';
 
-export default function Hero() {
+export default function CinematicHero() {
   return (
-    <section
-      id="hero"
-      className="
-        relative min-h-screen
-        overflow-hidden
-        bg-champagne
-      "
-    >
-      {/* ── Mobile: Stacked Layout | Desktop: Absolute-positioned editorial overlap ── */}
-      <div className="relative min-h-screen flex flex-col lg:flex-row items-center">
-
-        {/* ── Editorial Image — left side ── */}
-        <RevealOnScroll
-          animation="fade-in"
-          className="
-            relative
-            w-full lg:w-[55%]
-            h-[50vh] sm:h-[55vh] lg:h-screen
-            shrink-0
-          "
-        >
-          {/* Warm overlay for tonal harmony */}
-          <div className="absolute inset-0 bg-gradient-to-b from-champagne/20 via-transparent to-champagne/40 z-10 pointer-events-none lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-champagne/60" />
-
+    // Parent section keeps everything centered in the viewport
+    <section className="w-full bg-champagne flex justify-center items-center py-16 lg:py-24">
+      
+      {/* THE 1440P ANCHOR:
+        - justify-items-center ensures the inner grid stays centered in this block.
+        - lg:grid-cols-10 creates a tighter grid to allow better centering of the image.
+      */}
+      <div className="w-full max-w-[1440px] px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-10 items-center justify-items-center">
+        
+        {/* 1. THE FRAMED HERO IMAGE:
+          - lg:col-span-8: Occupies the bulk of the width.
+          - We remove the left-alignment bias to let the grid centering handle it.
+        */}
+        <div className="lg:col-span-8 relative aspect-[4/3] w-full rounded-sm overflow-hidden shadow-[0_10px_40px_rgba(44,36,33,0.05)]">
           <Image
             src="/media/hero-editorial.png"
-            alt="Artisanal Tres Leches — a moment of craft as three milks cascade over hand-baked sponge"
+            alt="The Crazy Crumbs Kitchen Scene"
             fill
-            className="object-cover object-center"
+            sizes="(max-width: 1440px) 80vw, 1150px"
+            className="object-cover"
             priority
-            sizes="(max-width: 1024px) 100vw, 55vw"
           />
-        </RevealOnScroll>
-
-        {/* ── Text Column ── */}
-        <div className="
-          relative z-20
-          w-full lg:w-[50%]
-          lg:absolute lg:right-0 lg:top-0 lg:h-full
-          flex items-center
-        ">
-          {/* Glass backing for overlap zone */}
-          <div className="
-            w-full
-            px-8 md:px-14 lg:px-16 xl:px-20
-            py-12 lg:py-0
-            lg:bg-champagne/75 lg:backdrop-blur-sm
-            lg:h-full lg:flex lg:items-center
-          ">
-            <div className="max-w-[520px] mx-auto lg:mx-0">
-              {/* Subtitle / Category */}
-              <RevealOnScroll animation="fade-up" delay={200}>
-                <span className="
-                  font-headline italic font-light
-                  text-[var(--text-caption)] text-ink-muted
-                  tracking-[0.15em] mb-7 block
-                ">
-                  Boutique Patisserie · Est. 2024
-                </span>
-              </RevealOnScroll>
-
-              {/* Headline */}
-              <RevealOnScroll animation="fade-up" delay={350}>
-                <h1 className="
-                  font-headline font-light
-                  text-[var(--text-hero)]
-                  leading-[0.95] tracking-[-0.02em]
-                  text-ink
-                  mb-8
-                ">
-                  Artisanal{" "}
-                  <em className="font-light italic text-blush-dark not-italic">Commissions</em>
-                  <br />
-                  <span className="text-[0.65em] font-light">for the Refined Palate</span>
-                </h1>
-              </RevealOnScroll>
-
-              {/* Gold Divider */}
-              <RevealOnScroll animation="fade-in" delay={500}>
-                <GoldDivider width="100px" className="mb-8" />
-              </RevealOnScroll>
-
-              {/* Subtext */}
-              <RevealOnScroll animation="fade-up" delay={550}>
-                <p className="
-                  font-body
-                  text-[var(--text-body)]
-                  text-ink-muted
-                  leading-[1.8]
-                  max-w-[400px]
-                  mb-10
-                ">
-                  World-Class Tres Leches and Boutique Confections.
-                  <br />
-                  <span className="font-headline italic text-blush-dark">
-                    Hand-crafted from scratch. 100% Natural.
-                  </span>
-                </p>
-              </RevealOnScroll>
-
-              {/* CTA */}
-              <RevealOnScroll animation="fade-up" delay={700}>
-                <Button href="#signature" id="cta-explore-collection">
-                  Explore the Collection
-                </Button>
-              </RevealOnScroll>
-            </div>
-          </div>
         </div>
-      </div>
 
-      {/* ── Decorative scroll indicator ── */}
-      <div
-        className="
-          absolute bottom-8 left-1/2 -translate-x-1/2
-          flex-col items-center gap-2
-          text-ink-light
-          animate-fade-in
-          hidden lg:flex
-          z-30
-        "
-        style={{ animationDelay: "900ms" }}
-      >
-        <span className="font-headline italic text-[var(--text-micro)] tracking-[0.15em]">
-          Scroll
-        </span>
-        <div className="w-px h-8 bg-gold/40 animate-pulse" />
+          
+       <div className="top-20 right-8 w-[420px] z-10 bg-[#FAF6EE]/85 backdrop-blur-md border border-gold/30 p-12 shadow-[0_20px_50px_rgba(44,36,33,0.08)] rounded-[20px] text-center">
+       <div>
+          
+          <h1 className="font-serif text-[2.5rem] font-light leading-[1.2] text-ink mb-6">
+            Artisanal <span className="italic text-blush-dark">Commissions</span>
+          </h1>
+          
+          <div className="w-[60px] h-[1px] bg-gold/40 mx-auto mb-8" />
+
+          <p className="font-sans text-[13px] text-ink-muted leading-relaxed mb-10">
+            World-Class Tres Leches and Boutique Confections. Hand-crafted from scratch. 100% Natural.
+          </p>
+
+          <button className="bg-blush-dark text-white px-8 py-3 font-sans text-[11px] tracking-[0.2em] uppercase border border-gold/40 hover:bg-[#A85A65] transition-all duration-500">
+            Explore Collection
+          </button>
+        </div>
+        </div>
+
       </div>
     </section>
   );

@@ -1,0 +1,41 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for Luxury Feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gallery-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--crazy-pink);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bespoke-gold);
+}
+
+/* Smooth transitions for interactive elements */
+a, button {
+  transition: all 0.3s ease;
+}
+
+/* Selection color */
+::selection {
+  background: var(--crazy-pink);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--crazy-pink);
+  color: white;
+}

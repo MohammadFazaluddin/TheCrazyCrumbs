@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════
    THE CRAZY CRUMBS — "Modern Heritage" Design System
@@ -7,24 +9,27 @@
 
 @theme {
   /* ── Color Palette: "Modern Heritage" ── */
-  --color-champagne: #F5F0E8;
-  --color-champagne-deep: #EDE6D6;
+  --color-champagne: #FAF6EE;
+  --color-champagne-deep: #F3EAE0;
   --color-champagne-warm: #E8DFD0;
   --color-blush: #C4A6A0;
-  --color-blush-light: #D4BBB6;
-  --color-blush-dark: #A88B84;
+  --color-blush-light: #F7E5E2;
+  --color-blush-dark: #C16773;
   --color-blush-muted: #CEBAB5;
-  --color-gold: #B8976A;
+  --color-gold: #C5A059;
   --color-gold-light: #D4B98A;
-  --color-gold-dark: #9A7D56;
+  --color-gold-dark: #A47E3B;
   --color-ink: #2C2421;
-  --color-ink-muted: #6B5E58;
-  --color-ink-light: #8A7D77;
-  --color-cream-overlay: rgba(245, 240, 232, 0.85);
+  --color-ink-muted: #534540;
+  --color-ink-light: #8E7A74;
+  --color-cream-overlay: rgba(250, 246, 238, 0.85);
 
   /* ── Typography ── */
   --font-headline: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-body: 'Tenor Sans', 'Gill Sans', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Gill Sans', 'Segoe UI', sans-serif;
+  /* Tailwind v4 semantic aliases */
+  --font-serif-display: "Cormorant Garamond", serif;
+  --font-sans-body: "Inter", sans-serif;
 
   /* ── Fluid Type Scale ── */
   --text-hero: clamp(3rem, 6vw, 5.5rem);
@@ -36,10 +41,13 @@
   --text-micro: 0.6875rem;
 
   /* ── Spacing: "Luxury Breathing Room" ── */
-  --spacing-luxury: clamp(2rem, 8vw, 8rem);
+  --spacing-luxury: clamp(1.5rem, 4vw, 4.5rem);
+  --spacing-section-y: clamp(5rem, 9vw, 8.5rem);
+  --content-max: 1320px;
 
   /* ── Motion ── */
   --ease-luxury: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-editorial: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   --duration-slow: 800ms;
   --duration-base: 400ms;
   --duration-fast: 200ms;
@@ -73,10 +81,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 a {
@@ -129,6 +139,30 @@ h4 { font-size: var(--text-subhead); }
   width: 100%;
 }
 
+/* ── Shared section layout (includes 1440p tuning) ── */
+.section-shell {
+  padding-inline: var(--spacing-luxury);
+}
+
+.section-content {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+}
+
+.section-y {
+  padding-block: var(--spacing-section-y);
+}
+
+@media (min-width: 1440px) {
+  .section-shell {
+    padding-inline: clamp(4.5rem, 6vw, 7rem);
+  }
+
+  .section-content {
+    width: min(100%, 1360px);
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    KEYFRAME ANIMATIONS
    ═══════════════════════════════════════════════════════════════════ */
@@ -179,6 +213,34 @@ h4 { font-size: var(--text-subhead); }
 @keyframes expandWidth {
   from { width: 0; }
   to { width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SIGNATURE CARD — WAVY OVERLAY
+   ═══════════════════════════════════════════════════════════════════ */
+
+.signature-card {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.signature-card::before {
+  content: "";
+  position: absolute;
+  inset: -40px -40px 50% -40px;
+  background:
+    radial-gradient(circle at 0% 120%, rgba(184, 151, 106, 0.20), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(196, 166, 160, 0.18), transparent 55%),
+    radial-gradient(circle at 50% 120%, rgba(237, 230, 214, 0.9), transparent 60%);
+  mix-blend-mode: soft-light;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.signature-card-inner {
+  position: relative;
+  border-radius: 28px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
