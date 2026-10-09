@@ -1,26 +1,25 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
 
-const cormorantGaramond = Cormorant_Garamond({
-  variable: "--font-headline",
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-body",
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "The Crazy Crumbs - Boutique Patisserie",
+  title: "The Crazy Crumbs — Boutique Patisserie",
   description:
-    "World-Class Tres Leches and Boutique Confections. Hand-crafted from scratch. 100% Natural. Request your bespoke commission today.",
+    "World-class tres leches and boutique confections, baked from scratch with natural ingredients. Order your cake with 24 hours' notice.",
   keywords: [
     "tres leches",
     "artisanal cake",
@@ -30,9 +29,9 @@ export const metadata: Metadata = {
     "natural ingredients",
   ],
   openGraph: {
-    title: "The Crazy Crumbs — Artisanal Commissions for the Refined Palate",
+    title: "The Crazy Crumbs — Boutique Patisserie",
     description:
-      "World-Class Tres Leches and Boutique Confections. Hand-crafted from scratch. 100% Natural.",
+      "World-class tres leches and boutique confections, baked from scratch with natural ingredients.",
     type: "website",
   },
 };
@@ -43,10 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${cormorantGaramond.variable} ${inter.variable}`}
-    >
+    <html lang="en" className={`${bodoni.variable} ${jost.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -2,129 +2,96 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { EnquiryButton } from "@/components/ui/Enquiry";
+
+const links = [
+  { href: "#tres-leches", label: "Tres leches" },
+  { href: "#menu", label: "Menu" },
+  { href: "#story", label: "Our story" },
+  { href: "#order", label: "How to order" },
+];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinkClass = `
-    relative
-    font-body text-xs uppercase tracking-[0.2em]
-    text-ink-muted
-    transition-colors duration-[400ms]
-    hover:text-gold
-    group
-  `;
-
-  const navLinks = [
-    { href: "#story", label: "Philosophy" },
-    { href: "#signature", label: "Collection" },
-  ];
-
-  const navLinksRight = [
-    { href: "#commission", label: "Commission" },
-  ];
-
   return (
-    <nav
-      id="main-navigation"
-      className={`
-        fixed top-0 left-0 right-0 z-50
-        transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]
-        ${
-          scrolled
-            ? "bg-[#FAF6EE]/85 backdrop-blur-md shadow-[0_1px_0_rgba(197,160,89,0.15)]"
-            : "bg-transparent"
-        }
-      `}
+    <header
+      className={`fixed inset-x-0 top-0 z-40 bg-milk transition-shadow duration-300 ${
+        scrolled || menuOpen ? "shadow-[0_1px_0_rgba(35,25,21,0.08)]" : ""
+      }`}
     >
-      <div className="section-shell">
-        <div className="section-content flex items-center justify-between py-5 min-[1440px]:py-6">
+      <nav className="shell flex h-16 items-center justify-between gap-4 md:h-[72px]" aria-label="Main">
+        <Link
+          href="/"
+          className="whitespace-nowrap font-display text-xl italic tracking-tight text-espresso sm:text-2xl"
+          onClick={() => setMenuOpen(false)}
+        >
+          The Crazy Crumbs
+        </Link>
 
-          {/* ── Left Nav Links ── */}
-          <div className="hidden md:flex items-center gap-10">
-            {navLinks.map(({ href, label }) => (
-              <a key={href} href={href} className={navLinkClass}>
-                {label}
-                {/* Gold underline */}
-                <span className="
-                  absolute -bottom-0.5 left-0
-                  h-px w-0
-                  bg-gold
-                  transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]
-                  group-hover:w-full
-                " />
-              </a>
-            ))}
-          </div>
-
-          {/* ── Centered Wordmark ── */}
-          <Link
-            href="/"
-            id="brand-wordmark"
-            className="
-              font-headline
-              text-sm md:text-base
-              uppercase tracking-[0.28em] font-light
-              text-ink
-              hover:text-gold
-              transition-colors duration-[400ms]
-              absolute left-1/2 -translate-x-1/2
-            "
-          >
-            The Crazy Crumbs
-          </Link>
-
-          {/* ── Right Nav + Bag ── */}
-          <div className="flex items-center gap-8 ml-auto">
-            {navLinksRight.map(({ href, label }) => (
-              <a key={href} href={href} className={`${navLinkClass} hidden md:relative`}>
-                {label}
-                <span className="
-                  absolute -bottom-0.5 left-0
-                  h-px w-0
-                  bg-gold
-                  transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]
-                  group-hover:w-full
-                " />
-              </a>
-            ))}
-
-            {/* Bag Icon */}
-            <button
-              id="selection-bag"
-              aria-label="View your selections"
-              className="
-                group relative p-2
-                text-gold hover:text-gold-dark
-                transition-colors duration-[400ms]
-                cursor-pointer
-              "
-            >
-              <svg
-                width="20"
-                height="22"
-                viewBox="0 0 22 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform duration-[400ms] group-hover:scale-105"
+        <ul className="hidden items-center gap-9 lg:flex">
+          {links.map(({ href, label }) => (
+            <li key={href}>
+              <a
+                href={href}
+                className="text-[0.95rem] text-cocoa transition-colors hover:text-rose"
               >
-                <path d="M3 7h16l-1.5 14H4.5L3 7z" />
-                <path d="M7 7V5a4 4 0 0 1 8 0v2" />
-              </svg>
-            </button>
-          </div>
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
+        <div className="flex items-center gap-1 sm:gap-2">
+          <EnquiryButton size="sm">
+            <span className="sm:hidden">Order</span>
+            <span className="hidden sm:inline">Order a cake</span>
+          </EnquiryButton>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="-mr-2.5 grid size-11 place-items-center rounded-full text-espresso hover:bg-sponge lg:hidden cursor-pointer"
+          >
+            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+              <path
+                d={menuOpen ? "M5 5l12 12M17 5L5 17" : "M3 7h16M3 15h16"}
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {menuOpen && (
+        <div id="mobile-menu" className="border-t border-espresso/10 bg-milk lg:hidden">
+          <ul className="shell flex flex-col py-4">
+            {links.map(({ href, label }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-3 font-display text-[1.75rem] text-espresso"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </header>
   );
 }

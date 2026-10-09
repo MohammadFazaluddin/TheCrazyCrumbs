@@ -1,68 +1,42 @@
-import SectionLabel from "@/components/ui/SectionLabel";
-import GoldDivider from "@/components/ui/GoldDivider";
-import RevealOnScroll from "@/components/ui/RevealOnScroll";
-
-const pillars = [
+const principles = [
   {
-    title: "Small-Batch Craft",
-    body: "Each commission is baked fresh in limited quantities to preserve texture, aroma, and finish.",
+    title: "Small batches",
+    body: "Each order is baked fresh in limited quantities to protect texture, aroma and finish.",
   },
   {
-    title: "Natural Ingredients",
-    body: "No palm oil, no shortcuts. Only clean ingredients chosen for depth and balance.",
+    title: "Natural ingredients",
+    body: "No palm oil and no shortcuts. Only clean ingredients chosen for depth and balance.",
   },
   {
-    title: "Bespoke Finish",
-    body: "From gifting boxes to event cakes, every detail is tailored for your occasion.",
+    title: "Made for your occasion",
+    body: "From gift boxes to event cakes, every detail is shaped around the moment you’re planning.",
   },
 ];
 
 export default function Story() {
   return (
-    <section
-      id="story"
-      className="section-shell section-y bg-champagne-deep/35"
-    >
-      <div className="section-content">
-        <RevealOnScroll animation="fade-up" className="mb-14 md:mb-20">
-          <SectionLabel label="Our Philosophy" />
-        </RevealOnScroll>
+    <section id="story" className="bg-milk py-16 md:py-36">
+      <div className="shell">
+        <h2 className="max-w-[16ch] text-[clamp(2.75rem,6.5vw,5.75rem)] italic leading-[1]">
+          Baked like a love letter, plated like fine art.
+        </h2>
 
-        <div className="grid gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-20 items-start">
-          <RevealOnScroll animation="slide-left">
-            <div>
-              <h2 className="font-headline font-light text-[var(--text-display)] text-ink leading-[1.03] mb-8">
-                Baked like a love letter,
-                <br />
-                plated like fine art.
-              </h2>
+        <div className="mt-10 grid gap-10 md:mt-20 md:gap-14 lg:grid-cols-12 lg:gap-16">
+          <p className="text-[1.05rem] leading-relaxed text-cocoa md:text-lg lg:col-span-5">
+            The Crazy Crumbs is a boutique dessert studio built on one belief:
+            memorable desserts come from care, patience and honest
+            ingredients. Every tres leches is soaked, rested and finished by
+            hand, so it arrives airy, silky and unmistakably ours.
+          </p>
 
-              <GoldDivider width="120px" className="mb-8" />
-
-              <p className="font-body text-[var(--text-body)] text-ink-muted leading-[1.9] max-w-[52ch]">
-                The Crazy Crumbs is a boutique dessert studio built around one
-                belief: memorable desserts come from care, patience, and
-                ingredient integrity. Every tres leches is soaked, rested, and
-                finished by hand to deliver a texture that is airy, silky, and
-                unmistakably refined.
-              </p>
-            </div>
-          </RevealOnScroll>
-
-          <div className="space-y-6">
-            {pillars.map((pillar, index) => (
-              <RevealOnScroll key={pillar.title} animation="fade-up" delay={180 * (index + 1)}>
-                <article className="border border-blush-light/30 bg-champagne/75 backdrop-blur-sm px-8 py-8">
-                  <h3 className="font-headline text-[var(--text-subhead)] italic font-light text-ink mb-3">
-                    {pillar.title}
-                  </h3>
-                  <p className="font-body text-[var(--text-caption)] leading-[1.9] tracking-[0.03em] text-ink-muted">
-                    {pillar.body}
-                  </p>
-                </article>
-              </RevealOnScroll>
+          <ul className="grid gap-8 sm:grid-cols-3 lg:col-span-7">
+            {principles.map(({ title, body }) => (
+              <li key={title}>
+                <h3 className="font-display text-2xl">{title}</h3>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-cocoa">{body}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
